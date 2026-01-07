@@ -1,276 +1,311 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Lalithaditya Saripalli | Developer Resume</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<title>Lalithaditya Saripalli | Hacker Resume</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!--
-      Resume content source:
-      :contentReference[oaicite:0]{index=0}
-    -->
+<style>
+:root {
+  --bg: #0b0f14;
+  --panel: #0f1623;
+  --border: #1f2a3a;
+  --text: #d1d7e0;
+  --muted: #8b949e;
+  --accent: #4cc9f0;
+  --green: #3fb950;
+  --purple: #b983ff;
+}
 
-    <style>
-        :root {
-            --bg: #0d1117;
-            --panel: #161b22;
-            --text: #c9d1d9;
-            --muted: #8b949e;
-            --accent: #58a6ff;
-            --border: #30363d;
-            --tag: #21262d;
-        }
+* {
+  box-sizing: border-box;
+}
 
-        * {
-            box-sizing: border-box;
-        }
+body {
+  margin: 0;
+  background: radial-gradient(circle at top, #0e1628, var(--bg));
+  color: var(--text);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
 
-        body {
-            margin: 0;
-            background: var(--bg);
-            color: var(--text);
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-            line-height: 1.6;
-        }
+.container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 24px;
+}
 
-        .container {
-            max-width: 960px;
-            margin: 40px auto;
-            padding: 24px;
-        }
+/* ===== Header / Terminal ===== */
+header {
+  background: linear-gradient(180deg, #0f172a, #020617);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+}
 
-        header {
-            border: 1px solid var(--border);
-            background: var(--panel);
-            padding: 24px;
-            border-radius: 8px;
-            margin-bottom: 32px;
-        }
+header::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.03),
+    rgba(255,255,255,0.03) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events: none;
+}
 
-        header h1 {
-            margin: 0;
-            font-size: 2rem;
-            color: var(--accent);
-        }
+header h1 {
+  margin: 0;
+  color: var(--accent);
+  font-size: 2.2rem;
+}
 
-        header p {
-            margin: 8px 0 0;
-            color: var(--muted);
-        }
+header p {
+  margin: 6px 0;
+  color: var(--muted);
+}
 
-        .links a {
-            color: var(--accent);
-            text-decoration: none;
-            margin-right: 16px;
-        }
+.prompt {
+  color: var(--green);
+}
 
-        .links a:hover {
-            text-decoration: underline;
-        }
+.links a {
+  color: var(--purple);
+  text-decoration: none;
+  margin-right: 16px;
+  font-size: 0.95rem;
+}
 
-        section {
-            margin-bottom: 32px;
-            border: 1px solid var(--border);
-            background: var(--panel);
-            border-radius: 8px;
-            overflow: hidden;
-        }
+.links a:hover {
+  text-decoration: underline;
+}
 
-        .section-title {
-            background: #0b1320;
-            padding: 12px 16px;
-            border-bottom: 1px solid var(--border);
-            color: var(--accent);
-            font-weight: bold;
-        }
+/* ===== Sections ===== */
+section {
+  margin-top: 32px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
 
-        .section-body {
-            padding: 16px;
-        }
+.section-title {
+  padding: 14px 18px;
+  background: #020617;
+  border-bottom: 1px solid var(--border);
+  color: var(--green);
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
 
-        .terminal::before {
-            content: "$ ";
-            color: #3fb950;
-        }
+.section-title::before {
+  content: "▸ ";
+  color: var(--accent);
+}
 
-        ul {
-            padding-left: 20px;
-            margin: 8px 0;
-        }
+.section-body {
+  padding: 18px;
+}
 
-        li {
-            margin-bottom: 6px;
-        }
+/* ===== Hacker Cards ===== */
+.card {
+  background: linear-gradient(180deg, #0b1220, #060a14);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 18px;
+  transition: transform 0.2s ease, border 0.2s ease;
+}
 
-        .skills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
+.card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+}
 
-        .skill {
-            background: var(--tag);
-            border: 1px solid var(--border);
-            padding: 4px 10px;
-            border-radius: 999px;
-            font-size: 0.85rem;
-        }
+.card-title {
+  color: #e6edf3;
+  font-weight: bold;
+}
 
-        .item {
-            margin-bottom: 20px;
-        }
+.card-meta {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin-bottom: 8px;
+}
 
-        .item-title {
-            font-weight: bold;
-            color: #e6edf3;
-        }
+ul {
+  margin: 8px 0 0;
+  padding-left: 20px;
+}
 
-        .item-meta {
-            color: var(--muted);
-            font-size: 0.9rem;
-        }
+li {
+  margin-bottom: 6px;
+}
 
-        footer {
-            text-align: center;
-            color: var(--muted);
-            font-size: 0.85rem;
-            margin-top: 40px;
-        }
+/* ===== Skills ===== */
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
 
-        @media (max-width: 600px) {
-            header h1 {
-                font-size: 1.6rem;
-            }
-        }
-    </style>
+.skill {
+  background: #020617;
+  border: 1px solid var(--border);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  position: relative;
+}
+
+.skill::after {
+  content: "▮";
+  color: var(--green);
+  position: absolute;
+  right: 6px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.skill:hover::after {
+  opacity: 1;
+}
+
+/* ===== Footer ===== */
+footer {
+  text-align: center;
+  margin: 40px 0 10px;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 1.8rem;
+  }
+}
+</style>
 </head>
+
 <body>
-    <div class="container">
-        <header>
-            <h1>Lalithaditya Saripalli</h1>
-            <p>Full-Stack Software Engineer · Backend & System Design Enthusiast</p>
-            <div class="links">
-                <a href="mailto:saripalli.lalithaditya@gmail.com">Email</a>
-                <a href="#">LinkedIn</a>
-                <a href="#">GitHub</a>
-                <span>+91 9000998390</span>
-            </div>
-        </header>
+<div class="container">
 
-        <section>
-            <div class="section-title terminal">about_me</div>
-            <div class="section-body">
-                Full-stack software engineer experienced in building scalable web applications using React, Node.js, and MongoDB.
-                Strong focus on RESTful APIs, real-time systems, cloud deployment, and CI/CD pipelines.
-                Passionate about backend engineering, system design, and building reliable distributed systems.
-            </div>
-        </section>
+<header>
+  <p class="prompt">user@portfolio:~$ whoami</p>
+  <h1>Lalithaditya Saripalli</h1>
+  <p>Full-Stack Software Engineer · Backend · Systems · DevOps</p>
+  <div class="links">
+    <a href="mailto:saripalli.lalithaditya@gmail.com">Email</a>
+    <a href="#">LinkedIn</a>
+    <a href="#">GitHub</a>
+    <span>+91 9000998390</span>
+  </div>
+</header>
 
-        <section>
-            <div class="section-title terminal">skills</div>
-            <div class="section-body">
-                <div class="skills">
-                    <span class="skill">Java</span>
-                    <span class="skill">Python</span>
-                    <span class="skill">C</span>
-                    <span class="skill">C++</span>
-                    <span class="skill">JavaScript</span>
-                    <span class="skill">SQL</span>
-                    <span class="skill">Dart</span>
-                    <span class="skill">React.js</span>
-                    <span class="skill">Node.js</span>
-                    <span class="skill">Express.js</span>
-                    <span class="skill">Flask</span>
-                    <span class="skill">GraphQL</span>
-                    <span class="skill">Socket.IO</span>
-                    <span class="skill">MongoDB</span>
-                    <span class="skill">MySQL</span>
-                    <span class="skill">PostgreSQL</span>
-                    <span class="skill">Docker</span>
-                    <span class="skill">Jenkins</span>
-                    <span class="skill">GitHub Actions</span>
-                    <span class="skill">AWS ECS</span>
-                    <span class="skill">Vercel</span>
-                    <span class="skill">CI/CD</span>
-                    <span class="skill">System Design</span>
-                    <span class="skill">Distributed Systems</span>
-                    <span class="skill">DSA</span>
-                </div>
-            </div>
-        </section>
+<section>
+  <div class="section-title">about_me</div>
+  <div class="section-body">
+    Full-stack engineer with a strong backend mindset. Experienced in building scalable systems,
+    real-time applications, and clean RESTful APIs. Obsessed with performance, system design,
+    and shipping reliable production code.
+  </div>
+</section>
 
-        <section>
-            <div class="section-title terminal">experience</div>
-            <div class="section-body">
-                <div class="item">
-                    <div class="item-title">Product Development Intern — PyroSynergy</div>
-                    <div class="item-meta">Jun 2025 – Nov 2025</div>
-                    <ul>
-                        <li>Engineered and optimized full-stack modules using React and Node.js, improving load time by 35%.</li>
-                        <li>Designed and secured 15+ RESTful APIs, reducing runtime errors by 25%.</li>
-                        <li>Deployed scalable services with CI/CD pipelines achieving 99.9% uptime.</li>
-                        <li>Automated analytics pipelines for 1,200+ monthly users, increasing engagement by 20%.</li>
-                        <li>Collaborated across Agile sprints covering design, development, testing, and deployment.</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <div class="section-title terminal">projects</div>
-            <div class="section-body">
-                <div class="item">
-                    <div class="item-title">Blog Platform (MERN)</div>
-                    <div class="item-meta">Jan 2025 – Apr 2025</div>
-                    <ul>
-                        <li>Built a scalable blog platform with JWT authentication and role-based access.</li>
-                        <li>Improved CRUD performance by 25% using MongoDB indexing and schema optimization.</li>
-                    </ul>
-                </div>
-
-                <div class="item">
-                    <div class="item-title">ChitChat – Real-Time Chat Application</div>
-                    <div class="item-meta">Mar 2025 – May 2025</div>
-                    <ul>
-                        <li>Developed real-time messaging using Socket.IO with online presence and media sharing.</li>
-                        <li>Achieved sub-50ms message latency through optimized WebSocket event handling.</li>
-                    </ul>
-                </div>
-
-                <div class="item">
-                    <div class="item-title">Auditorium Scheduling System</div>
-                    <div class="item-meta">Jan 2025 – Apr 2025</div>
-                    <ul>
-                        <li>Implemented conflict-free booking workflows with approval and rescheduling automation.</li>
-                        <li>Integrated automated reminders using email services and scheduled jobs.</li>
-                    </ul>
-                </div>
-
-                <div class="item">
-                    <div class="item-title">Reality Check – Business Readiness Platform</div>
-                    <div class="item-meta">Aug 2025 – Nov 2025</div>
-                    <ul>
-                        <li>Developed analytics-driven assessment and scoring systems.</li>
-                        <li>Deployed serverless architecture with CI/CD integration.</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <div class="section-title terminal">education</div>
-            <div class="section-body">
-                <div class="item">
-                    <div class="item-title">B.Tech in Information Technology</div>
-                    <div class="item-meta">VNR Vignana Jyothi Institute of Engineering and Technology, Hyderabad</div>
-                    <div class="item-meta">2023 – Present · CGPA: 9.4 / 10</div>
-                </div>
-            </div>
-        </section>
-
-        <footer>
-            Built like code. Read like documentation. Designed for humans.
-        </footer>
+<section>
+  <div class="section-title">skills --list</div>
+  <div class="section-body">
+    <div class="skills">
+      <span class="skill">Java</span>
+      <span class="skill">Python</span>
+      <span class="skill">C / C++</span>
+      <span class="skill">JavaScript</span>
+      <span class="skill">SQL</span>
+      <span class="skill">React.js</span>
+      <span class="skill">Node.js</span>
+      <span class="skill">Express.js</span>
+      <span class="skill">Flask</span>
+      <span class="skill">GraphQL</span>
+      <span class="skill">Socket.IO</span>
+      <span class="skill">MongoDB</span>
+      <span class="skill">PostgreSQL</span>
+      <span class="skill">Docker</span>
+      <span class="skill">AWS</span>
+      <span class="skill">CI/CD</span>
+      <span class="skill">System Design</span>
+      <span class="skill">Distributed Systems</span>
+      <span class="skill">DSA</span>
     </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-title">experience.log</div>
+  <div class="section-body">
+    <div class="card">
+      <div class="card-title">Product Development Intern — PyroSynergy</div>
+      <div class="card-meta">Jun 2025 – Nov 2025</div>
+      <ul>
+        <li>Optimized full-stack modules, reducing page load time by 35%.</li>
+        <li>Designed and secured 15+ REST APIs with 25% fewer runtime errors.</li>
+        <li>Built CI/CD pipelines achieving 99.9% uptime.</li>
+        <li>Processed analytics for 1,200+ monthly users.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-title">projects --exec</div>
+  <div class="section-body">
+    <div class="card">
+      <div class="card-title">Blog Platform (MERN)</div>
+      <div class="card-meta">JWT · RBAC · Performance Optimization</div>
+      <ul>
+        <li>Built scalable blogging system with role-based access.</li>
+        <li>Improved database performance by 25% using indexing.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">ChitChat — Real-Time Chat App</div>
+      <div class="card-meta">Socket.IO · WebSockets</div>
+      <ul>
+        <li>Real-time messaging with online presence.</li>
+        <li>Sub-50ms message latency through optimized events.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Auditorium Scheduling System</div>
+      <div class="card-meta">Automation · Notifications</div>
+      <ul>
+        <li>Conflict-free booking and approval workflows.</li>
+        <li>Automated reminders using background jobs.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-title">education.info</div>
+  <div class="section-body">
+    <div class="card">
+      <div class="card-title">B.Tech — Information Technology</div>
+      <div class="card-meta">VNR Vignana Jyothi Institute · 2023 – Present</div>
+      <p>CGPA: <strong>9.4 / 10</strong></p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Crafted like a terminal. Built like a system. Debugged like a hacker.
+</footer>
+
+</div>
 </body>
 </html>
