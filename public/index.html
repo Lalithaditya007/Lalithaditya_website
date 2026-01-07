@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>Lalithaditya Saripalli | Hacker Resume</title>
+<title>Lalithaditya Saripalli | Interactive Hacker Resume</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <style>
@@ -17,9 +17,7 @@
   --purple: #b983ff;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -34,7 +32,7 @@ body {
   padding: 24px;
 }
 
-/* ===== Header / Terminal ===== */
+/* ===== Terminal Header ===== */
 header {
   background: linear-gradient(180deg, #0f172a, #020617);
   border: 1px solid var(--border);
@@ -58,6 +56,12 @@ header::after {
   pointer-events: none;
 }
 
+.prompt {
+  color: var(--green);
+  margin-bottom: 8px;
+  white-space: pre;
+}
+
 header h1 {
   margin: 0;
   color: var(--accent);
@@ -69,10 +73,6 @@ header p {
   color: var(--muted);
 }
 
-.prompt {
-  color: var(--green);
-}
-
 .links a {
   color: var(--purple);
   text-decoration: none;
@@ -80,9 +80,7 @@ header p {
   font-size: 0.95rem;
 }
 
-.links a:hover {
-  text-decoration: underline;
-}
+.links a:hover { text-decoration: underline; }
 
 /* ===== Sections ===== */
 section {
@@ -91,6 +89,14 @@ section {
   border: 1px solid var(--border);
   border-radius: 10px;
   overflow: hidden;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease;
+}
+
+section.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .section-title {
@@ -99,7 +105,6 @@ section {
   border-bottom: 1px solid var(--border);
   color: var(--green);
   font-weight: bold;
-  letter-spacing: 0.5px;
 }
 
 .section-title::before {
@@ -111,19 +116,25 @@ section {
   padding: 18px;
 }
 
-/* ===== Hacker Cards ===== */
+/* ===== Cards ===== */
 .card {
   background: linear-gradient(180deg, #0b1220, #060a14);
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 16px;
   margin-bottom: 18px;
-  transition: transform 0.2s ease, border 0.2s ease;
+  transition: transform 0.2s ease, border 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
 }
 
 .card:hover {
   transform: translateY(-3px);
   border-color: var(--accent);
+}
+
+.card.active {
+  border-color: var(--green);
+  box-shadow: 0 0 0 1px rgba(63,185,80,0.4);
 }
 
 .card-title {
@@ -137,14 +148,8 @@ section {
   margin-bottom: 8px;
 }
 
-ul {
-  margin: 8px 0 0;
-  padding-left: 20px;
-}
-
-li {
-  margin-bottom: 6px;
-}
+ul { padding-left: 20px; }
+li { margin-bottom: 6px; }
 
 /* ===== Skills ===== */
 .skills {
@@ -162,12 +167,25 @@ li {
   position: relative;
 }
 
-.skill::after {
-  content: "▮";
-  color: var(--green);
+.skill:hover {
+  border-color: var(--accent);
+}
+
+.skill[data-hint]::after {
+  content: attr(data-hint);
   position: absolute;
-  right: 6px;
+  bottom: 140%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #020617;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  padding: 6px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  font-size: 0.75rem;
   opacity: 0;
+  pointer-events: none;
   transition: opacity 0.2s ease;
 }
 
@@ -182,13 +200,6 @@ footer {
   color: var(--muted);
   font-size: 0.85rem;
 }
-
-/* ===== Responsive ===== */
-@media (max-width: 600px) {
-  header h1 {
-    font-size: 1.8rem;
-  }
-}
 </style>
 </head>
 
@@ -196,7 +207,7 @@ footer {
 <div class="container">
 
 <header>
-  <p class="prompt">user@portfolio:~$ whoami</p>
+  <div id="boot" class="prompt"></div>
   <h1>Lalithaditya Saripalli</h1>
   <p>Full-Stack Software Engineer · Backend · Systems · DevOps</p>
   <div class="links">
@@ -210,35 +221,29 @@ footer {
 <section>
   <div class="section-title">about_me</div>
   <div class="section-body">
-    Full-stack engineer with a strong backend mindset. Experienced in building scalable systems,
-    real-time applications, and clean RESTful APIs. Obsessed with performance, system design,
-    and shipping reliable production code.
+    Backend-focused full-stack engineer who enjoys building scalable systems,
+    clean APIs, and production-ready infrastructure.
   </div>
 </section>
 
 <section>
-  <div class="section-title">skills --list</div>
+  <div class="section-title">skills --inspect</div>
   <div class="section-body">
     <div class="skills">
-      <span class="skill">Java</span>
-      <span class="skill">Python</span>
-      <span class="skill">C / C++</span>
-      <span class="skill">JavaScript</span>
-      <span class="skill">SQL</span>
-      <span class="skill">React.js</span>
-      <span class="skill">Node.js</span>
-      <span class="skill">Express.js</span>
-      <span class="skill">Flask</span>
-      <span class="skill">GraphQL</span>
-      <span class="skill">Socket.IO</span>
-      <span class="skill">MongoDB</span>
-      <span class="skill">PostgreSQL</span>
-      <span class="skill">Docker</span>
-      <span class="skill">AWS</span>
-      <span class="skill">CI/CD</span>
-      <span class="skill">System Design</span>
-      <span class="skill">Distributed Systems</span>
-      <span class="skill">DSA</span>
+      <span class="skill" data-hint="Primary backend language">Java</span>
+      <span class="skill" data-hint="Scripting & automation">Python</span>
+      <span class="skill" data-hint="Low-level fundamentals">C / C++</span>
+      <span class="skill" data-hint="Web & async logic">JavaScript</span>
+      <span class="skill" data-hint="Query optimization">SQL</span>
+      <span class="skill" data-hint="Frontend UI">React.js</span>
+      <span class="skill" data-hint="Server runtime">Node.js</span>
+      <span class="skill" data-hint="REST APIs">Express.js</span>
+      <span class="skill" data-hint="Microservices">Flask</span>
+      <span class="skill" data-hint="Realtime systems">Socket.IO</span>
+      <span class="skill" data-hint="NoSQL">MongoDB</span>
+      <span class="skill" data-hint="Containers">Docker</span>
+      <span class="skill" data-hint="CI automation">CI/CD</span>
+      <span class="skill" data-hint="Architecture thinking">System Design</span>
     </div>
   </div>
 </section>
@@ -250,42 +255,30 @@ footer {
       <div class="card-title">Product Development Intern — PyroSynergy</div>
       <div class="card-meta">Jun 2025 – Nov 2025</div>
       <ul>
-        <li>Optimized full-stack modules, reducing page load time by 35%.</li>
-        <li>Designed and secured 15+ REST APIs with 25% fewer runtime errors.</li>
-        <li>Built CI/CD pipelines achieving 99.9% uptime.</li>
-        <li>Processed analytics for 1,200+ monthly users.</li>
+        <li>Improved load times by 35%.</li>
+        <li>Designed 15+ secured REST APIs.</li>
+        <li>Maintained 99.9% uptime via CI/CD.</li>
       </ul>
     </div>
   </div>
 </section>
 
 <section>
-  <div class="section-title">projects --exec</div>
+  <div class="section-title">projects --run</div>
   <div class="section-body">
     <div class="card">
+      <div class="card-title">ChitChat — Real-Time Chat</div>
+      <ul>
+        <li>Socket.IO powered messaging.</li>
+        <li>Sub-50ms latency.</li>
+      </ul>
+    </div>
+
+    <div class="card">
       <div class="card-title">Blog Platform (MERN)</div>
-      <div class="card-meta">JWT · RBAC · Performance Optimization</div>
       <ul>
-        <li>Built scalable blogging system with role-based access.</li>
-        <li>Improved database performance by 25% using indexing.</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <div class="card-title">ChitChat — Real-Time Chat App</div>
-      <div class="card-meta">Socket.IO · WebSockets</div>
-      <ul>
-        <li>Real-time messaging with online presence.</li>
-        <li>Sub-50ms message latency through optimized events.</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <div class="card-title">Auditorium Scheduling System</div>
-      <div class="card-meta">Automation · Notifications</div>
-      <ul>
-        <li>Conflict-free booking and approval workflows.</li>
-        <li>Automated reminders using background jobs.</li>
+        <li>JWT authentication.</li>
+        <li>Optimized MongoDB queries.</li>
       </ul>
     </div>
   </div>
@@ -296,16 +289,68 @@ footer {
   <div class="section-body">
     <div class="card">
       <div class="card-title">B.Tech — Information Technology</div>
-      <div class="card-meta">VNR Vignana Jyothi Institute · 2023 – Present</div>
-      <p>CGPA: <strong>9.4 / 10</strong></p>
+      <div class="card-meta">VNR Vignana Jyothi Institute · CGPA 9.4</div>
     </div>
   </div>
 </section>
 
 <footer>
-  Crafted like a terminal. Built like a system. Debugged like a hacker.
+  Designed like a system. Read like logs. Trusted like uptime.
 </footer>
 
 </div>
+
+<script>
+/* ===== Boot Typing Effect ===== */
+const bootText = [
+  "booting portfolio v1.0...",
+  "loading modules...",
+  "initializing skills...",
+  "establishing secure connection...",
+  "ready."
+];
+
+const bootEl = document.getElementById("boot");
+let i = 0;
+
+function typeLine(text, cb) {
+  let idx = 0;
+  const interval = setInterval(() => {
+    bootEl.textContent += text[idx++] || "";
+    if (idx > text.length) {
+      clearInterval(interval);
+      bootEl.textContent += "\n";
+      cb && cb();
+    }
+  }, 40);
+}
+
+(function runBoot() {
+  if (i < bootText.length) {
+    typeLine(bootText[i++], runBoot);
+  }
+})();
+
+/* ===== Section Reveal ===== */
+const sections = document.querySelectorAll("section");
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+    }
+  });
+}, { threshold: 0.15 });
+
+sections.forEach(sec => observer.observe(sec));
+
+/* ===== Card Focus Interaction ===== */
+document.querySelectorAll(".card").forEach(card => {
+  card.addEventListener("click", () => {
+    document.querySelectorAll(".card").forEach(c => c.classList.remove("active"));
+    card.classList.add("active");
+  });
+});
+</script>
+
 </body>
 </html>
